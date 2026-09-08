@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/home', function () {
+    $user = request()->user();
+
+    return 'Hello ' . $user->name . ', your ID is ' . $user->id;
+})->middleware('auth:web');
