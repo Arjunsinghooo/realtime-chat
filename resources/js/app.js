@@ -30,9 +30,14 @@ if (conversationId) {
 
             const messageElement = document.createElement('div');
             const senderElement = document.createElement('strong');
+            const bodyElement = document.createElement('p');
 
+            messageElement.className = 'max-w-2xl rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm';
+            senderElement.className = 'block text-sm text-indigo-700';
             senderElement.textContent = `${message.user.name}:`;
-            messageElement.append(senderElement, ` ${message.body}`);
+            bodyElement.className = 'mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-slate-700';
+            bodyElement.textContent = message.body;
+            messageElement.append(senderElement, bodyElement);
             messagesContainer.appendChild(messageElement);
         });
 
