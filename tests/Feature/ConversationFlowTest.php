@@ -76,6 +76,28 @@ class ConversationFlowTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_only_members_can_authorize_the_private_room_channel(): void
+    {
+        $member = User::factory()->create();
+        $nonMember = User::factory()->create();
+        $conversation = Conversation::factory()->create();
+        $conversation->users()->attach($member);
+
+        $this->actingAs($member)
+            ->post('/broadcasting/auth', [
+                'channel_name' => 'private-chat.'.$conversation->id,
+                'socket_id' => '1234.5678',
+            ])
+            ->assertOk();
+
+        $this->actingAs($nonMember)
+            ->post('/broadcasting/auth', [
+                'channel_name' => 'private-chat.'.$conversation->id,
+                'socket_id' => '1234.5678',
+            ])
+            ->assertForbidden();
+    }
+
     public function test_selected_room_only_displays_its_own_messages(): void
     {
         $user = User::factory()->create();
