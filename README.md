@@ -1,4 +1,36 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Realtime Chat
+
+A Laravel realtime room chat application using private Laravel Reverb channels.
+
+## Run the published Docker image
+
+After the image is published to Docker Hub, run this one command:
+
+```bash
+docker run -d --name realtime-chat -p 8080:80 -p 8081:8080 -v realtime-chat-data:/data DOCKERHUB_USERNAME/realtime-chat:latest
+```
+
+Open `http://localhost:8080/home`. The `realtime-chat-data` Docker volume keeps the SQLite database and application key between restarts.
+
+To stop and start it later:
+
+```bash
+docker stop realtime-chat
+docker start realtime-chat
+```
+
+For local development with MySQL and Redis, use:
+
+```bash
+docker compose up -d --build
+```
+
+## Technology
+
+- Laravel 13 and Fortify authentication
+- Laravel Reverb and Echo for private realtime message channels
+- Docker, Nginx, PHP-FPM, MySQL, Redis, and queue worker for development
+
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>

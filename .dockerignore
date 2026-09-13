@@ -1,0 +1,10 @@
+.env
+.git
+.agents
+.claude
+.codex
+node_modules
+vendor
+public/build
+storage/logs
+storage/framework
